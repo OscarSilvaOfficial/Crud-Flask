@@ -1,0 +1,31 @@
+.container {
+    margin-top: 4rem;
+}
+
+.login {
+    width: 50%;
+    margin: auto;
+}
+
+#alert-login {
+    margin-bottom: 5rem !important;
+    width: 100% !important; 
+    margin: auto !important; 
+    text-align: center !important;
+}
+
+#alert-login-success {
+    margin-bottom: 5rem !important;
+    width: 100% !important; 
+    margin: auto !important; 
+    text-align: center !important;
+    margin-top: 5rem !important;
+}
+
+
+/* JQuery Styles
+*/
+
+.error {
+    color: red;
+}

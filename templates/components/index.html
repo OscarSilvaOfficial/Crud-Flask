@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<table id="dtMaterialDesignExample" class="table" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+        <th class="th-sm">Nome
+        </th>
+        <th class="th-sm">Categoria
+        </th>
+        <th class="th-sm">Console
+        </th>
+    </thead>
+    <tbody>
+        {% for obj in lista %}
+        <tr>
+            <td>{{ obj.jogo }}</td>
+            <td>{{ obj.categoria }}</td>
+            <td>{{ obj.console }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+        <th class="th-sm">Nome
+        </th>
+        <th class="th-sm">Categoria
+        </th>
+        <th class="th-sm">Console
+        </th>
+        </tr>
+    </tfoot>
+</table>
+<a name="" id="" class="btn btn-primary" href="/novo" role="button"><i class="fas fa-plus"></i></a>
+
+{% include 'components/auth/autenticado.html' %}
+{% endblock %}
+    

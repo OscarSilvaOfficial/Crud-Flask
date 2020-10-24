@@ -1,0 +1,11 @@
+{% with messages = get_flashed_messages() %}
+      {% if messages %} 
+          <ul id="messages">
+          {% for message in messages %}
+          <div class="alert alert-success animated fadeInDown" id="alert-login-success" role="alert">
+            <a href="#" class="alert-link">{{message}}</a>
+          </div>
+          {% endfor %}
+          </ul>
+      {% endif %}
+{% endwith %}
