@@ -1,7 +1,10 @@
 from flask import *
 from backend.entities import *
+from flask_cors import CORS
 
 app = Flask(__name__, template_folder="../frontend/templates", static_folder='../frontend/static')
+cors = CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000"}})
+
 lista = []
 
 usuario = Usuario('admin', 'Oscar da Silva', 'admin')
@@ -12,7 +15,17 @@ usuarios = {
     usuario2.id: usuario2
 }
 
-@app.route('/')
+@app.route('/api')
+def home():
+    message = {}
+    data = {}
+
+    message['message'] = 'Hello World from Flask!'
+    data['status'] = 200
+    data['data'] = message
+    return jsonify(data)
+
+@app.route('/index')
 def index():
     if 'usuario_logado' not in session:
         return redirect('/login')
