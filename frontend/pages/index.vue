@@ -9,7 +9,7 @@ import axios from 'axios'
 
 export default {
   async asyncData () {
-    let data = await axios.get('http://127.0.0.1:5000/index')
+    let data = await axios.get('http://127.0.0.1:5000/api')
     console.log(data)
     return data.data
   }
