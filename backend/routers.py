@@ -1,6 +1,6 @@
 from flask import *
 from backend.models import *
-from .dao import JogoDao
+from .dao import JogoDao, UsuarioDao
 from flask_mysqldb import MySQL
 
 app = Flask(__name__, template_folder="../frontend/templates", static_folder='../frontend/static')
@@ -8,19 +8,22 @@ app = Flask(__name__, template_folder="../frontend/templates", static_folder='..
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'flask'
+app.config['MYSQL_DB'] = 'jogoteca'
 app.config['MYSQL_port'] = '3306'
 
 db = MySQL(app)
 
 jogo_dao = JogoDao(db)
+usuario_dao = UsuarioDao(db)
+
 # Flask Router
 @app.route('/')
 def index():
     if 'usuario_logado' not in session:
         return redirect('/login')
     else:
-        user = usuarios[session['usuario_logado']].nome
+        user = usuario_dao.buscar_por_id([session['usuario_logado']]).nome
+        lista = jogo_dao.listar()
         return render_template('components/index.html', titulo='Jogos', lista=lista, user=user)
 
 @app.route('/novo')
@@ -28,7 +31,7 @@ def novo():
     if 'usuario_logado' not in session or session['usuario_logado'] == None:
         return redirect(url_for('login', proxima=url_for('novo')))
     else:
-        user = usuarios[session['usuario_logado']].nome
+        user = usuario_dao.buscar_por_id([session['usuario_logado']]).nome
         return render_template('components/create.html', titulo='Novo Jogo', user=user)
 
 @app.route('/create', methods=['POST',])
@@ -37,8 +40,7 @@ def create():
     categoria = request.form['categoria']
     console = request.form['console']
     jogo = Jogo(nome, categoria, console)
-    jogo_dao.salvar(jogo)
-    #lista.append(jogo) 
+    jogo_dao.salvar(jogo) 
     return redirect(url_for('index'))
 
 @app.route('/login')
@@ -48,8 +50,8 @@ def login():
 
 @app.route('/autenticar', methods=['POST',])
 def autenticar():
-    if request.form['usuario'] in usuarios:
-        usuario = usuarios[request.form['usuario']]
+    usuario = usuario_dao.buscar_por_id(request.form['usuario'])
+    if usuario:
         if usuario.senha == request.form['senha']:
             session['usuario_logado'] = usuario.id
             flash(f'{usuario.nome.upper()} Está logado!')

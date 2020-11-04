@@ -16,9 +16,9 @@ class JogoDao:
         cursor = self.__db.connection.cursor()
 
         if (jogo.id):
-            cursor.execute(SQL_ATUALIZA_JOGO, (jogo.nome, jogo.categoria, jogo.console, jogo.id))
+            cursor.execute(SQL_ATUALIZA_JOGO, (jogo.jogo, jogo.categoria, jogo.console, jogo.id))
         else:
-            cursor.execute(SQL_CRIA_JOGO, (jogo.nome, jogo.categoria, jogo.console))
+            cursor.execute(SQL_CRIA_JOGO, (jogo.jogo, jogo.categoria, jogo.console))
             jogo.id = cursor.lastrowid
         self.__db.connection.commit()
         return jogo

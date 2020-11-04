@@ -2,12 +2,12 @@ import MySQLdb
 print('Conectando...')
 conn = MySQLdb.connect(user='root',
     passwd='',
-    db='flask',
+    db='mysql',
     host='127.0.0.1'
 )
 
 # Descomente se quiser desfazer o banco...
-conn.cursor().execute("DROP DATABASE `flask`;")
+conn.cursor().execute("DROP DATABASE `jogoteca`;")
 conn.commit()
 
 criar_tabelas = '''SET NAMES utf8;
