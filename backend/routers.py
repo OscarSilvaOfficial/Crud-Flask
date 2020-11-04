@@ -1,31 +1,21 @@
 from flask import *
-from backend.entities import *
-from flask_cors import CORS
+from backend.models import *
+from .dao import JogoDao
+from flask_mysqldb import MySQL
 
 app = Flask(__name__, template_folder="../frontend/templates", static_folder='../frontend/static')
-cors = CORS(app, resources={r"/*": {"origins": "http://127.0.0.1:3000"}})
 
-lista = []
+app.config['MYSQL_HOST'] = '127.0.0.1'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'flask'
+app.config['MYSQL_port'] = '3306'
 
-usuario = Usuario('admin', 'Oscar da Silva', 'admin')
-usuario2 = Usuario('teste', 'Meu Teste', 'teste')
+db = MySQL(app)
 
-usuarios = {
-    usuario.id: usuario,
-    usuario2.id: usuario2
-}
-
-@app.route('/api')
-def home():
-    message = {}
-    data = {}
-
-    message['message'] = 'Hello World from Flask!'
-    data['status'] = 200
-    data['data'] = message
-    return jsonify(data)
-
-@app.route('/index')
+jogo_dao = JogoDao(db)
+# Flask Router
+@app.route('/')
 def index():
     if 'usuario_logado' not in session:
         return redirect('/login')
@@ -47,7 +37,8 @@ def create():
     categoria = request.form['categoria']
     console = request.form['console']
     jogo = Jogo(nome, categoria, console)
-    lista.append(jogo) 
+    jogo_dao.salvar(jogo)
+    #lista.append(jogo) 
     return redirect(url_for('index'))
 
 @app.route('/login')
@@ -73,6 +64,7 @@ def autenticar():
     else:
         flash('Credenciais incorretas! Insira as credenciáis corretas.')
         return redirect(url_for('login'))
+
 @app.route('/logout')
 def logout():
     if session.get('usuario_logado'):
