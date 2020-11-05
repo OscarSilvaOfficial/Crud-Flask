@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form method="POST" action="{{url_for('create')}}" id='create-game'>
+<form method="POST" action="{{ url_for('create') }}" id='create-game'>
   <fieldset>
     <div class="form-group">
       <label for="nome">Nome</label>
@@ -19,4 +19,3 @@
 </form>
 </div>
 {% endblock %}
-    

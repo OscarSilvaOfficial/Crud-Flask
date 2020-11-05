@@ -7,6 +7,19 @@
     margin: auto;
 }
 
+.fa-edit {
+    color: blue;
+    text-align: center;
+}
+
+.fa-trash {
+    color: red;
+}
+
+.fa-change {
+    margin: .3rem !important;
+}
+
 #alert-login {
     margin-bottom: 5rem !important;
     width: 100% !important; 
@@ -28,4 +41,12 @@
 
 .error {
     color: red;
+}
+
+/* MDB
+*/
+
+.md-form label {
+    -webkit-transform: translateY(-14px) scale(0.8) !important;
+    transform: translateY(-14px) scale(0.8) !important;
 }

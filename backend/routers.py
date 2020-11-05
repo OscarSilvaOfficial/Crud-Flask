@@ -1,5 +1,5 @@
 from flask import *
-from backend.models import *
+from .models import Jogo, Usuario
 from .dao import JogoDao, UsuarioDao
 from flask_mysqldb import MySQL
 
@@ -12,7 +12,6 @@ app.config['MYSQL_DB'] = 'jogoteca'
 app.config['MYSQL_port'] = '3306'
 
 db = MySQL(app)
-
 jogo_dao = JogoDao(db)
 usuario_dao = UsuarioDao(db)
 
@@ -42,6 +41,24 @@ def create():
     jogo = Jogo(nome, categoria, console)
     jogo_dao.salvar(jogo) 
     return redirect(url_for('index'))
+
+@app.route('/editar', methods=['POST'])
+def edit():
+    ident = request.form['id']
+    nome = request.form['nome']
+    categoria = request.form['categoria']
+    console = request.form['console']
+    jogo = Jogo(nome, categoria, console, ident)
+    jogo_dao.salvar(jogo) 
+    flash('Jogo alterado!')
+    return 'Formulário salvo' 
+
+@app.route('/deletar/<int:id>')
+def deletar(id):
+    jogo_dao.deletar(id)
+    flash('O jogo foi removido!')
+    return redirect('/')
+
 
 @app.route('/login')
 def login():

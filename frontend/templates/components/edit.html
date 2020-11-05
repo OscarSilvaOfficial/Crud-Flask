@@ -1,0 +1,38 @@
+<!-- Modal -->
+<div class="modal fade" id="editGameModal" tabindex="-1" role="dialog"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitulo"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" id="formEdit">
+          <input type="hidden" id="id" name="id">
+          <div class="md-form input-with-post-icon">
+            <i class="fas fa-ghost input-prefix"></i>
+            <input type="text" id="nome" name="nome" class="form-control">
+            <label>Nome </label>
+          </div>
+          <div class="md-form input-with-post-icon">
+            <i class="fas fa-clipboard-list input-prefix"></i>
+            <input type="text" id="categoria" name="categoria" class="form-control">
+            <label for="suffixInside">Categoria </label>
+          </div>
+          <div class="md-form input-with-post-icon">
+            <i class="fas fa-gamepad input-prefix"></i>
+            <input type="text" id="console" name="console" class="form-control">
+            <label for="suffixInside">Console </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-primary" form="formEdit">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div> 

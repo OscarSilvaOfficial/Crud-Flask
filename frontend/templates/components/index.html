@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<table id="dtMaterialDesignExample" class="table" cellspacing="0" width="100%">
+<table id="jogoTable" class="table" cellspacing="0" width="100%">
     <thead>
         <tr>
         <th class="th-sm">Nome
@@ -10,6 +10,8 @@
         </th>
         <th class="th-sm">Console
         </th>
+        <th class="th-sm text-center">Alterar
+        </th>
     </thead>
     <tbody>
         {% for obj in lista %}
@@ -17,6 +19,10 @@
             <td>{{ obj.jogo }}</td>
             <td>{{ obj.categoria }}</td>
             <td>{{ obj.console }}</td>
+            <td class="text-center">
+                <a href="#" data-toggle="modal" data-target="#editGameModal" onclick="populateGame('{{ obj.id }}', '{{ obj.jogo }}', '{{ obj.categoria }}', '{{ obj.console }}')"><i class="fas fa-edit fa-change"></i></a>
+                <a href="{{ url_for('deletar', id=obj.id) }}"><i class="fa fa-trash fa-change" aria-hidden="true"></i></a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
@@ -28,11 +34,14 @@
         </th>
         <th class="th-sm">Console
         </th>
+        <th class="th-sm text-center">Alterar
+        </th>
         </tr>
     </tfoot>
 </table>
 <a name="" id="" class="btn btn-primary" href="/novo" role="button"><i class="fas fa-plus"></i></a>
 
+{% include 'components/edit.html' %}
 {% include 'components/auth/autenticado.html' %}
 {% endblock %}
     
