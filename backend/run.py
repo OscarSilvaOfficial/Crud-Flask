@@ -9,4 +9,6 @@ app.config['MYSQL_DB'] = 'jogoteca'
 app.config['MYSQL_port'] = '3306'
 
 app.secret_key = "asdokifhsAFHJQOIURHWEF'12983791283RQIGFE" 
-app.run()
+
+if __name__ == '__main__':
+    app.run(debug=True)
