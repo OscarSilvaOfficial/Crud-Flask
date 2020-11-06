@@ -1,6 +1,6 @@
-from ext.configuration import *
-from auth import routers
-from jogo import routers
+from backend.ext.configuration import *
+from backend.auth import routers
+from backend.jogo import routers
 
 app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
