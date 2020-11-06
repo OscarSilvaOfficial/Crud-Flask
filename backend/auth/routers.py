@@ -1,4 +1,4 @@
-from .views import *
+from backend.auth.views import *
 from ext.configuration import *
 
 app.add_url_rule('/login', 'login', login)
