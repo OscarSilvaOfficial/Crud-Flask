@@ -1,4 +1,5 @@
-from .models import Jogo, Usuario
+from auth.models import *
+from jogo.models import *
 
 SQL_DELETA_JOGO = 'delete from jogo where id = %s'
 SQL_JOGO_POR_ID = 'SELECT id, nome, categoria, console from jogo where id = %s'
