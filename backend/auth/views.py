@@ -1,6 +1,6 @@
 from flask import *
-from .models import *
-from ext.configuration import *
+from backend.auth.models import *
+from backend.ext.configuration import *
 
 
 def login():

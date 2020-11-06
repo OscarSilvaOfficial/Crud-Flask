@@ -1,5 +1,5 @@
-from .views import *
-from ext.configuration import *
+from backend.jogo.views import *
+from backend.ext.configuration import *
 
 app.add_url_rule('/', 'index', index)
 app.add_url_rule('/novo', 'novo', novo)
