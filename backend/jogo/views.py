@@ -1,6 +1,11 @@
-from flask import *
+from flask import render_template, url_for, redirect, request, flash, session
 from backend.jogo.models import *
-from backend.ext.configuration import *
+from backend.ext.configuration import getDB
+from backend.dao import JogoDao, UsuarioDao
+
+param = getDB()
+jogo_dao = JogoDao(param)
+usuario_dao = UsuarioDao(param)
 
 def index():
     if 'usuario_logado' not in session:

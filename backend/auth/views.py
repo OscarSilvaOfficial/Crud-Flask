@@ -1,6 +1,10 @@
-from flask import *
+from flask import render_template, url_for, redirect, request, flash, session
 from backend.auth.models import *
-from backend.ext.configuration import *
+from backend.ext.configuration import getDB
+from backend.dao import UsuarioDao
+
+param = getDB()
+usuario_dao = UsuarioDao(param)
 
 
 def login():
