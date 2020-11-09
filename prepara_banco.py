@@ -17,9 +17,9 @@ criar_tabelas = '''SET NAMES utf8;
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
     CREATE TABLE `usuario` (
-      `id` varchar(8) COLLATE utf8_bin NOT NULL,
+      `id` varchar(20) COLLATE utf8_bin NOT NULL,
       `nome` varchar(20) COLLATE utf8_bin NOT NULL,
-      `senha` varchar(8) COLLATE utf8_bin NOT NULL,
+      `senha` varchar(255) COLLATE utf8_bin NOT NULL,
       PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;'''
 

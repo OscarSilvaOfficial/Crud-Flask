@@ -1,15 +1,31 @@
 from flask import render_template, url_for, redirect, request, flash, session
 from backend.auth.models import *
 from backend.ext.configuration import getDB
-from backend.dao import UsuarioDao
+from backend.auth.dao import UsuarioDao
 
 param = getDB()
 usuario_dao = UsuarioDao(param)
 
 
+def criaUsuario():
+    id = request.form['id']
+    nome = request.form['nome']
+    senha = request.form['senha']
+    usuario = Usuario(id, nome, senha)
+    try:
+        usuario_dao.salvar(usuario)
+        flash('Usuário Criado!')
+        return redirect(url_for('index'))
+    except:
+        flash('Usuário já está registrado!')
+        return redirect(url_for('index'))
+
+
+
 def login():
     proxima = request.args.get('proxima')
     return render_template('components/auth/login.html', proxima=proxima)
+
 
 def autenticar():
     usuario = usuario_dao.buscar_por_id(request.form['usuario'])
@@ -28,6 +44,7 @@ def autenticar():
     else:
         flash('Credenciais incorretas! Insira as credenciáis corretas.')
         return redirect(url_for('login'))
+
 
 def logout():
     if session.get('usuario_logado'):
